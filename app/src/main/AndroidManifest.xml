@@ -20,7 +20,7 @@
         <!-- Google Maps API ključ -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDykIfltJA0gHJqhHu93AUsAVjuwn76xmc"/>
+            android:value="PUBLIC_KEY"/>
 
         <!-- Autentikacijske aktivnosti -->
         <activity android:name=".LoginActivity" />
