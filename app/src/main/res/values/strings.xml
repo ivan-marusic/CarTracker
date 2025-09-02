@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CarTracker</string>
+
+    <string name="battery_description">Baterija</string>
+    <string name="percentage">--%</string>
+    <string name="status">Status: Nepoznato</string>
+    <string name="logout">Odjavi se</string>
+    <string name="geofence_status_inside">Status: Unutar zone</string>
+    <string name="geofence_status_outside">Status: Izvan zone</string>
+
+    <string name="battery_percentage">%1$d%%</string>
+
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Battery body -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M2,6 h18 v12 h-18 z" />
+
+    <!-- Battery cap -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M20,10 h2 v4 h-2 z" />
+
+    <!-- Battery fill -->
+    <path
+        android:fillColor="#76FF03"
+        android:pathData="M3,7 h10 v10 h-10 z" />
+</vector>
