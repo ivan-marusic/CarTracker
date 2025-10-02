@@ -11,6 +11,15 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 - Alerts when vehicle moves 30 km within a defined radius
 - Location updates every 10 seconds
 
+## Screenshots
+![Start page](images/start_page.jpg)
+
+![Sign-Up](images/sign-up.jpg)
+
+![In Radius](images/in_radius.jpg)
+
+![Out of Radius](images/out_of_radius.jpg)
+
 ## Technologies Used
 
 - Kotlin (Android)
