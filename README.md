@@ -10,7 +10,7 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Live location** updates to Firebase Realtime Database
 - **Lightweight modem stack**: SIM7600 AT‑sockets (`NETOPEN`/`CIPOPEN`/`CIPSEND`) — **no PPP/LwIP** on the MCU
@@ -20,4 +20,4 @@
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
