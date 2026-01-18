@@ -7,7 +7,6 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 ## Features
 
 - Real-time location tracking
-- Display of vehicle path over the last 24 hours
 - Alerts when vehicle moves 30 km within a defined radius
 - Location updates every 10 seconds
 
