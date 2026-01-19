@@ -4,7 +4,7 @@
 
 - [**CarTracker Android app**](android) (Kotlin) — displays real‑time vehicle location from Firebase on Google Maps.
 - [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — acquires GNSS position and streams compact JSON over raw TCP.
-- **Python TCP relay (Oracle VM)** — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
+- [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
 
 > The repository originally contains the Android project structure (e.g., `app/`, Gradle files). Firmware and server live in their own folders under `firmware/` and `server/`. [1](https://github.com/ivan-marusic/CarTracker)
 
