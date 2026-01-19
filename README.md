@@ -60,7 +60,7 @@ Displays the vehicle position on a map
 Shows whether the vehicle is inside/outside a configured radius
 Includes UI screens shown in /images/
 
-Open the project in Android Studio, configure your Firebase credentials, and build.
+Open the project in Android Studio, configure your Firebase credentials, and build. [See here](android)
 
 ## Testing the System
 
