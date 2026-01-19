@@ -31,10 +31,7 @@ TCP socket creation (AT+CIPOPEN=0,"TCP","<HOST>",<PORT>)
 JSON telemetry upload using AT+CIPSEND
 
 Telemetry JSON Format
-`{  "latitude": 44.110000,  
-"longitude": 15.400000,  
-"timestamp": "2025-08-09T16:30:00Z"
-}`
+```{  "latitude": 44.110000,  "longitude": 15.400000,  "timestamp": "2025-08-09T16:30:00Z"}```
 This structure matches the Firebase Realtime Database schema used by the Android app.
 Full details, including setup and code structure, are located in: [firmware/stm32f429_sim7600_rawtcp](firmware/stm32f429_sim7600_rawtcp/)
 
