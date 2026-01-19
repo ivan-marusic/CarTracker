@@ -6,7 +6,7 @@
 - [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — acquires GNSS position and streams compact JSON over raw TCP.
 - [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
 
-> The repository originally contains the Android project structure (e.g., [`app/`](android/app), Gradle files). Firmware and server live in their own folders under `firmware/` and `server/`.
+> The repository originally contains the Android project structure (e.g., [`app/`](android/app), Gradle files). Firmware and server live in their own folders under [`firmware/`](firmware/stm32f429_sim7600_rawtcp) and `server/`.
 
 ---
 
