@@ -37,7 +37,7 @@ Telemetry JSON Format
 }
 This structure matches the Firebase Realtime Database schema used by the Android app.
 Full details, including setup and code structure, are located in:
-[firmware/stm32f429_sim7600_rawtcp/README.md] (firmware/stm32f429_sim7600_rawtcp)
+[firmware/stm32f429_sim7600_rawtcp/README.md] (firmware/stm32f429_sim7600_rawtcp/README.md)
 
 ## Python TCP Relay (Oracle VM)
 The relay server acts as a secure gateway between the embedded device and Firebase:
