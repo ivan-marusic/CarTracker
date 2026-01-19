@@ -37,7 +37,7 @@ Telemetry JSON Format
 }
 This structure matches the Firebase Realtime Database schema used by the Android app.
 Full details, including setup and code structure, are located in:
-[firmware/stm32f429_sim7600_rawtcp/README.md] (firmware/stm32f429_sim7600_rawtcp/README.md)
+[firmware] (firmware/stm32f429_sim7600_rawtcp/README.md)
 
 ## Python TCP Relay (Oracle VM)
 The relay server acts as a secure gateway between the embedded device and Firebase:
@@ -50,7 +50,7 @@ Writes to the database path:
 /location
 
 Steps for running the server, environment variables, and firewall setup are documented in:
-[server/python/README.md] (server/python)
+[server] (server/python)
 
 ##  Android App
 The Android app (Kotlin + Google Maps SDK):
