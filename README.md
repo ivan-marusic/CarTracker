@@ -6,7 +6,7 @@
 - [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — acquires GNSS position and streams compact JSON over raw TCP.
 - [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
 
-> The repository originally contains the Android project structure (e.g., `app/`, Gradle files). Firmware and server live in their own folders under `firmware/` and `server/`. [1](https://github.com/ivan-marusic/CarTracker)
+> The repository originally contains the Android project structure (e.g., `app/`, Gradle files). Firmware and server live in their own folders under `firmware/` and `server/`.
 
 ---
 
@@ -37,7 +37,7 @@ Telemetry JSON Format
 }
 This structure matches the Firebase Realtime Database schema used by the Android app.
 Full details, including setup and code structure, are located in:
-➡ firmware/stm32f429_sim7600_rawtcp/README.md
+[firmware/stm32f429_sim7600_rawtcp/README.md] (firmware/stm32f429_sim7600_rawtcp)
 
 ## Python TCP Relay (Oracle VM)
 The relay server acts as a secure gateway between the embedded device and Firebase:
@@ -50,7 +50,7 @@ Writes to the database path:
 /location
 
 Steps for running the server, environment variables, and firewall setup are documented in:
-➡ server/python/README.md
+[server/python/README.md] (server/python)
 
 ##  Android App
 The Android app (Kotlin + Google Maps SDK):
