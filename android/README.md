@@ -15,13 +15,13 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 ![Start page](../images/start_page.jpg)
 
 #### Sign-up page
-![Sign-Up](images/sign-up.jpg)
+![Sign-Up](../images/sign-up.jpg)
 
 #### Car in 30km radius
-![In Radius](images/in_radius.jpg)
+![In Radius](../images/in_radius.jpg)
 
 #### Car out of radius
-![Out of Radius](images/out_of_radius.jpg)
+![Out of Radius](../images/out_of_radius.jpg)
 
 ## Technologies Used
 
