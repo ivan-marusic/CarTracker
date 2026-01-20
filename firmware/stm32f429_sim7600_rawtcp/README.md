@@ -67,7 +67,6 @@ AT+CIPOPEN=0,"TCP","<VM-IP>",4000
 AT+CIPSEND=0,<len>
 {"latitude":..., "longitude":..., "timestamp":"..."}
 
-
 5. Python server receives this JSON → pushes to Firebase → Android app reads /location.
 
 ## Requirements
@@ -79,10 +78,7 @@ Python TCP relay running on your Oracle VM
 Firebase Realtime Database enabled
 Pmod USB‑UART(for debugging)
 
-## Debugging Tools
-
-
-## 🛠 Debugging Setup (Pmod USB‑UART Sniffer)
+## Debugging Setup (Pmod USB‑UART Sniffer)
 
 During development, I used a **Pmod USB‑UART adapter** connected to **UART5** on the STM32F429 in order to monitor all communication between the MCU (UART2) and the SIM7600G‑H modem.
 
@@ -110,7 +106,7 @@ Even though **USART2** is the actual interface to the SIM7600G‑H module:
 - **USART2_TX (PD5)** sends AT commands → modem  
 - **USART2_RX (PD6)** receives responses ← modem  
 
-…I mirrored important log messages and raw AT traffic to **USART5**, so I could observe everything using the Pmod USB‑UART and a serial program such as PuTTY, Minicom, or CuteCom.
+I mirrored important log messages and raw AT traffic to **USART5**, so I could observe everything using the Pmod USB‑UART and a serial program such as PuTTY, Minicom, or CuteCom.
 
 This “debug UART tapping” is extremely helpful for:
 - Debugging new AT commands  
