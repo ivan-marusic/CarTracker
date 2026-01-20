@@ -77,8 +77,50 @@ SIM7600G‑H module
 Valid APN for your M2M SIM card
 Python TCP relay running on your Oracle VM
 Firebase Realtime Database enabled
+Pmod USB‑UART(for debugging)
 
-![Debugging hardware](../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg)
+## Debugging Tools
+
+
+## 🛠 Debugging Setup (Pmod USB‑UART Sniffer)
+
+During development, I used a **Pmod USB‑UART adapter** connected to **UART5** on the STM32F429 in order to monitor all communication between the MCU (UART2) and the SIM7600G‑H modem.
+
+Although the SIM7600G‑H is wired to **USART2** (PD5 = TX2, PD6 = RX2), I routed the transmitted AT commands and received modem responses into **USART5** so they could be viewed on a PC terminal at **115200 baud**.
+
+This allows real‑time debugging of:
+- All outgoing AT commands from STM32 → SIM7600  
+- All incoming responses from SIM7600 → STM32  
+- JSON packets being prepared for TCP upload  
+- Errors such as `SEND FAIL`, `NETOPEN ERROR`, or malformed `+CGNSINF` output  
+
+### **STM32 → Pmod USB‑UART wiring**
+
+| STM32 Pin     | Function                   | Pmod USB‑UART |
+|---------------|----------------------------|---------------|
+| **PD2**       | UART5_RX  (receive log)    | TX            |
+| **PC12**      | UART5_TX  (send debug)     | RX            |
+| **GND**       | Ground                     | GND           |
+| **Baudrate**  | 115200 8N1                 | —             |
+
+### Monitoring USART2 via USART5
+
+Even though **USART2** is the actual interface to the SIM7600G‑H module:
+
+- **USART2_TX (PD5)** sends AT commands → modem  
+- **USART2_RX (PD6)** receives responses ← modem  
+
+…I mirrored important log messages and raw AT traffic to **USART5**, so I could observe everything using the Pmod USB‑UART and a serial program such as PuTTY, Minicom, or CuteCom.
+
+This “debug UART tapping” is extremely helpful for:
+- Debugging new AT commands  
+- Watching GNSS output changes  
+- Inspecting TCP socket sequences (`NETOPEN`, `CIPOPEN`, `CIPSEND`)  
+- Diagnosing connectivity failures over LTE  
+
+### Debugging Adapter
+
+![Pmod USB-UART](../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg)
 
 ## License
 
