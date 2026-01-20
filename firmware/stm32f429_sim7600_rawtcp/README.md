@@ -78,6 +78,8 @@ Valid APN for your M2M SIM card
 Python TCP relay running on your Oracle VM
 Firebase Realtime Database enabled
 
+![Debugging hardware](../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg)
+
 ## License
 
 This firmware is part of the CarTracker project (MIT License applies to entire repository unless stated otherwise).
