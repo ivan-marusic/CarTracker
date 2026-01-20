@@ -12,7 +12,7 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 
 ## Screenshots
 #### Start page
-![Start page](../../images/start_page.jpg)
+![Start page](../images/start_page.jpg)
 
 #### Sign-up page
 ![Sign-Up](images/sign-up.jpg)
