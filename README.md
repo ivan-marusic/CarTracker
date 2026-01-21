@@ -65,7 +65,7 @@ Observes the /location node for live updates
 Displays the vehicle position on a map
 Shows whether the vehicle is inside/outside a configured radius
 Includes UI screens shown in [/images/](images)
-
+<p align="center">
 <p float="left">
   <img src="images/start_page.jpg" width="200" />
   <img src="images/in_radius.jpg" width="200" /> 
