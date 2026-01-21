@@ -1,3 +1,4 @@
+# Embedded Device (STM32F429 + SIM7600G‑H)
 ![Hardware Photo](../../images/STM32F429+SIM7600G-H.jpg)
 
 STM32F429 + SIM7600G‑H Raw TCP Telemetry Firmware
