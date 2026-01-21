@@ -11,6 +11,12 @@ This repository contains:
 - Firmware under [`firmware/`](firmware/stm32f429_sim7600_rawtcp)
 - TCP relay code under [`server/`](server).
 
+##  Getting Started
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/ivan-marusic/CarTracker.git
+```
 ---
 
 ##  Features
@@ -60,7 +66,11 @@ Displays the vehicle position on a map
 Shows whether the vehicle is inside/outside a configured radius
 Includes UI screens shown in [/images/](images)
 
-Open the project in Android Studio, configure your Firebase credentials, and build. [See here](android)
+To run:
+
+1. Open in Android Studio
+2. Add Firebase configuration
+3. Build and deploy. [See here](android)
 
 ## Testing the System
 
