@@ -1,6 +1,6 @@
 # Embedded Device (STM32F429 + SIM7600G-H CAT4 4G (LTE) Shield)
 ![Hardware Photo]
-<img src="https://user-images.githubusercontent.com/link-to-your-image.png" width="200" />
+<img src="../../images/STM32F429+SIM7600G-H.jpg" width="200" />
 
 (../../images/STM32F429+SIM7600G-H.jpg)
 
