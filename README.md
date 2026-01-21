@@ -51,14 +51,14 @@ Writes to the database path:
 Steps for running the server, environment variables, and firewall setup are documented in:
 [server/python](server/python)
 
-##  Android App
+##  Android App (Kotlin)
 The Android app (Kotlin + Google Maps SDK):
 
 Connects to Firebase Realtime Database
 Observes the /location node for live updates
 Displays the vehicle position on a map
 Shows whether the vehicle is inside/outside a configured radius
-Includes UI screens shown in /images/
+Includes UI screens shown in [/images/](images)
 
 Open the project in Android Studio, configure your Firebase credentials, and build. [See here](android)
 
