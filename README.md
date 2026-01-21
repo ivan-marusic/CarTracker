@@ -67,9 +67,9 @@ Shows whether the vehicle is inside/outside a configured radius
 Includes UI screens shown in [/images/](images)
 
 <p float="left">
-  <img src="images/start_page.jpg" width="100" />
-  <img src="images/in_radius.jpg" width="100" /> 
-  <img src="images/out_of_radius.jpg" width="100" />
+  <img src="images/start_page.jpg" width="100" align="center" />
+  <img src="images/in_radius.jpg" width="100" align="center" /> 
+  <img src="images/out_of_radius.jpg" width="100" align="center" />
 </p>
 
 To run:
