@@ -1,6 +1,7 @@
 # Embedded Device (STM32F429 + SIM7600G-H CAT4 4G (LTE) Shield)
+
 <p align="center">
-<img src="../../images/STM32F429+SIM7600G-H.jpg" width="800" />
+<img src="../../images/STM32F429+SIM7600G-H.jpg" width="900" />
 </p>
 
 STM32F429 + SIM7600G‑H Raw TCP Telemetry Firmware
@@ -118,8 +119,9 @@ This “debug UART tapping” is extremely helpful for:
 - Diagnosing connectivity failures over LTE  
 
 ### Debugging Adapter
-
-![Pmod USB-UART](../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg)
+<p align="center">
+<img src="../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="900" />
+</p>
 
 ## License
 
