@@ -1,7 +1,7 @@
 # Embedded Device (STM32F429 + SIM7600G-H CAT4 4G (LTE) Shield)
 
 
-<img src="../../images/STM32F429+SIM7600G-H.jpg" width="400" />
+<img src="../../images/STM32F429+SIM7600G-H.jpg" width="600" />
 
 
 STM32F429 + SIM7600G‑H Raw TCP Telemetry Firmware
