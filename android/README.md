@@ -1,7 +1,7 @@
 # CarTracker
 
 CarTracker is an Android application that displays the real-time location of a vehicle using data from Firebase.  
-The vehicle's location is sent by a custom device built with an STM32F429 microcontroller and a SIM7600G-H 4G shield.
+The vehicle's location is sent by a custom device built with an STM32F429 microcontroller and a SIM7600G-H CAT4 4G (LTE) Shield.
    	      ![App_Image](app/src/main/res/drawable/cartracker_background.jpeg)
 
 ## Features
@@ -12,23 +12,23 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 
 ## Screenshots
 #### Start page
-![Start page](../images/start_page.jpg)
+   ![Start page](../images/start_page.jpg)
 
 #### Sign-up page
-![Sign-Up](../images/sign-up.jpg)
+   ![Sign-Up](../images/sign-up.jpg)
 
 #### Car in 30km radius
-![In Radius](../images/in_radius.jpg)
+   ![In Radius](../images/in_radius.jpg)
 
 #### Car out of radius
-![Out of Radius](../images/out_of_radius.jpg)
+   ![Out of Radius](../images/out_of_radius.jpg)
 
 ## Technologies Used
 
 - Kotlin (Android)
 - Firebase Realtime Database
 - Google Maps SDK
-- STM32F429 + SIM7600G-H (CarTracker device)
+- STM32F429 + SIM7600G-H CAT4 4G (LTE) Shield (CarTracker device)
 
 ## Getting Started
 
