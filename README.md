@@ -39,6 +39,10 @@ Modem IP stack activation (AT+NETOPEN)
 TCP socket creation (AT+CIPOPEN=0,"TCP","<HOST>",<PORT>)
 JSON telemetry upload using AT+CIPSEND
 
+<p align="center">
+  <img src="images/STM32F429+SIM7600G-H.jpg" width="200" />
+</p>
+
 Telemetry JSON Format
 ```{  "latitude": 44.110000,  "longitude": 15.400000,  "timestamp": "2025-08-09T16:30:00Z"}```
 This structure matches the Firebase Realtime Database schema used by the Android app.
