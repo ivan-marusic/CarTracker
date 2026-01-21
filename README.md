@@ -40,7 +40,7 @@ TCP socket creation (AT+CIPOPEN=0,"TCP","<HOST>",<PORT>)
 JSON telemetry upload using AT+CIPSEND
 
 <p align="center">
-  <img src="images/STM32F429+SIM7600G-H.jpg" width="400" />
+  <img src="images/STM32F429+SIM7600G-H.jpg" width="500" />
 </p>
 
 Telemetry JSON Format
