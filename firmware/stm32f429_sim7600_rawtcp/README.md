@@ -1,8 +1,7 @@
 # Embedded Device (STM32F429 + SIM7600G-H CAT4 4G (LTE) Shield)
-
-
-<img src="../../images/STM32F429+SIM7600G-H.jpg" width="600" />
-
+<p align="center">
+<img src="../../images/STM32F429+SIM7600G-H.jpg" width="800" />
+</p>
 
 STM32F429 + SIM7600G‑H Raw TCP Telemetry Firmware
 This firmware is part of the CarTracker system, a vehicle‑tracking solution that sends real‑time GPS coordinates from an embedded device to a cloud backend. The data is consumed by an Android application that displays the vehicle location using Firebase Realtime Database.
