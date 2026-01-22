@@ -31,11 +31,12 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 
 - STM32F429 microcontroller board
 - SIM7600G-H CAT4 4G (LTE) Shield
+- SIM7600G‑H module requires antennas -> MAIN (LTE antenna) and GNSS antenna
 - Female to Female jumper wires (UART wiring between STM32 and SIM7600G-H)
 - PmodUSBUART module for debugging
 - USB-A to Mini USB cable for STM32F429
-- USB-A to Micro USB cable for SIM7600G-H CAT4 4G (LTE) Shield and PmodUSBUART module
-- Machine-to-Machine (M2M) SIM card -> I used Things Mobile network operator
+- USB-A to Micro USB cable for SIM7600G-H and PmodUSBUART module
+- Machine-to-Machine (M2M) SIM card -> I used **Things Mobile** network operator
 
 <p align="center">
   <img src="images/STM32F429+SIM7600G-H.jpg" width="500" />
