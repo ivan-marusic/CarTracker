@@ -27,7 +27,12 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - **Clean separation of concerns**: firmware ↔ relay ↔ mobile app
 - **Extensible** to historical tracks, alerts, and telemetry (speed, sats, battery)
 
----
+## Hardware
+
+- STM32F429 microcontroller board
+- SIM7600G‑H 4G/GNSS module
+- Female-Female jumper wires (UART wiring between STM32 ↔ SIM7600G-H)
+- 
 
 ## Firmware (STM32F429 + SIM7600G‑H)
 The firmware communicates with the SIM7600G‑H modem via UART and performs:
