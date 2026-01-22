@@ -43,6 +43,15 @@ git clone https://github.com/ivan-marusic/CarTracker.git
   <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="500" />
 </p>
 
+# Software & Tools
+
+- **STM32CubeIDE** – firmware development and flashing
+- **PuTTY** – UART debugging and AT command testing
+- **Android Studio** – building and running the Android app
+- **Python3** – running the TCP relay server
+- **Oracle server** – hosting the relay server on a VM
+- **Firebase Console** – monitoring the Realtime Database
+
 ## Firmware (STM32F429 + SIM7600G‑H)
 The firmware communicates with the SIM7600G‑H modem via UART and performs:
 
