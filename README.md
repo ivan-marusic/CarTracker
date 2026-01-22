@@ -36,8 +36,8 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - 
 
 <p align="center">
-  <img src="images/STM32F429+SIM7600G-H.jpg" width="600" />
-  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="600" />
+  <img src="images/STM32F429+SIM7600G-H.jpg" width="500" />
+  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="500" />
 </p>
 
 ## Firmware (STM32F429 + SIM7600G‑H)
