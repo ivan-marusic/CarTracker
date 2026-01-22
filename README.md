@@ -30,9 +30,15 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 ## Hardware
 
 - STM32F429 microcontroller board
-- SIM7600G‑H 4G/GNSS module
-- Female-Female jumper wires (UART wiring between STM32 ↔ SIM7600G-H)
+- SIM7600G-H CAT4 4G (LTE) Shield
+- Female to Female jumper wires (UART wiring between STM32 and SIM7600G-H)
+- PmodUSBUART module for debugging
 - 
+
+<p align="center">
+  <img src="images/STM32F429+SIM7600G-H.jpg" width="600" />
+  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="600" />
+</p>
 
 ## Firmware (STM32F429 + SIM7600G‑H)
 The firmware communicates with the SIM7600G‑H modem via UART and performs:
@@ -43,10 +49,6 @@ APN setup (AT+CGDCONT=1,"IP","<APN>")
 Modem IP stack activation (AT+NETOPEN)
 TCP socket creation (AT+CIPOPEN=0,"TCP","<HOST>",<PORT>)
 JSON telemetry upload using AT+CIPSEND
-
-<p align="center">
-  <img src="images/STM32F429+SIM7600G-H.jpg" width="600" />
-</p>
 
 Telemetry JSON Format
 ```{  "latitude": 44.110000,  "longitude": 15.400000,  "timestamp": "2025-08-09T16:30:00Z"}```
