@@ -6,12 +6,25 @@
 - [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — acquires GNSS position and streams compact JSON over raw TCP.
 - [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
 
+## System Architecture
+
+```mermaid
+flowchart LR
+    Device[STM32F429 + SIM7600G-H]
+    Relay[Python TCP Relay<br/>(Oracle VM)]
+    Firebase[Firebase Realtime DB]
+    App[Android App<br/>(Kotlin)]
+
+    Device -- TCP / JSON --> Relay
+    Relay -- HTTPS --> Firebase
+    Firebase -- Realtime Sync --> App
+```
 This repository contains:
 - The Android project in [`app/`](android/app)
 - Firmware under [`firmware/`](firmware/stm32f429_sim7600_rawtcp)
 - TCP relay code under [`server/`](server).
 
-##  Getting Started
+## Getting Started
 
 ### 1. Clone the repository
 ```bash
@@ -19,7 +32,7 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 ```
 ---
 
-##  Features
+## Features
 
 - **Live location** updates to Firebase Realtime Database
 - **Lightweight modem stack**: SIM7600 AT‑sockets (`NETOPEN`/`CIPOPEN`/`CIPSEND`) — **no PPP/LwIP** on the MCU
@@ -43,7 +56,7 @@ git clone https://github.com/ivan-marusic/CarTracker.git
   <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="490" />
 </p>
 
-# Software & Tools
+## Software & Tools
 
 - **STM32CubeIDE** – firmware development and flashing
 - **PuTTY** – UART debugging and AT command testing
@@ -80,7 +93,7 @@ Writes to the database path:
 Steps for running the server, environment variables, and firewall setup are documented in:
 [server/python](server/python)
 
-##  Android App (Kotlin)
+## Android App (Kotlin)
 The Android app (Kotlin + Google Maps SDK):
 
 Connects to Firebase Realtime Database
