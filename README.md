@@ -7,6 +7,9 @@
 - [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
 
 ## System Architecture
+<p align="center">
+  <img src="images/architecture.png" width="490" />
+</p>
 
 ## Getting Started
 
