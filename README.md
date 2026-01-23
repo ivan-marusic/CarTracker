@@ -8,7 +8,7 @@
 
 ## System Architecture
 <p align="center">
-  <img src="images/architecture.png" width="490" />
+  <img src="images/architecture.png" width="300" />
 </p>
 
 ## Getting Started
