@@ -117,7 +117,7 @@ To run:
     CIPOPEN OK
     SEND OK
 
-4. Check Firebase Console -> Realtime Database → /location
+4. Check Firebase Console -> Realtime Database -> /location
 
 5. Open the Android app:
    -> Map updates live with the transmitted coordinates
