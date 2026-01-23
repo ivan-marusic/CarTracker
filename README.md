@@ -51,17 +51,17 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - **Python3** – running the TCP relay server
 - **Oracle server** – hosting the relay server on a VM
 - **Firebase Console** – monitoring the Realtime Database
-
+```markdown
 ## Firmware (STM32F429 + SIM7600G‑H)
 The firmware communicates with the SIM7600G‑H modem via UART and performs:
 
-GNSS activation (AT+CGNSPWR=1)
-Location retrieval (AT+CGNSINF)
-APN setup (AT+CGDCONT=1,"IP","<APN>")
-Modem IP stack activation (AT+NETOPEN)
-TCP socket creation (AT+CIPOPEN=0,"TCP","<HOST>",<PORT>)
-JSON telemetry upload using AT+CIPSEND
-
+- GNSS activation (`AT+CGNSPWR=1`)
+- GNSS location retrieval (`AT+CGNSINF`)
+- APN configuration (`AT+CGDCONT`)
+- Modem IP stack activation (`AT+NETOPEN`)
+- TCP socket creation (`AT+CIPOPEN`)
+- JSON telemetry upload (`AT+CIPSEND`)
+```
 Telemetry JSON Format
 ```{  "latitude": 44.110000,  "longitude": 15.400000,  "timestamp": "2025-08-09T16:30:00Z"}```
 This structure matches the Firebase Realtime Database schema used by the Android app.
