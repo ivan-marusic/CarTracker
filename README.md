@@ -42,8 +42,8 @@ git clone https://github.com/ivan-marusic/CarTracker.git
     -> Tested with **Things Mobile** network operator
 
 <p align="center">
-  <img src="images/STM32F429+SIM7600G-H.jpg" width="490" />
-  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="490" />
+  <img src="images/STM32F429+SIM7600G-H.jpg" width="400" />
+  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="400" />
 </p>
 
 ## Software & Tools
