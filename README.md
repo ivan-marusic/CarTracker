@@ -7,22 +7,17 @@
 - [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
 
 ## System Architecture
-
 ```mermaid
 flowchart LR
     Device[STM32F429 + SIM7600G-H]
-    Relay[Python TCP Relay<br/>(Oracle VM)]
+    Relay[Python TCP Relay\n(Oracle VM)]
     Firebase[Firebase Realtime DB]
-    App[Android App<br/>(Kotlin)]
+    App[Android App\n(Kotlin)]
 
     Device -- TCP / JSON --> Relay
     Relay -- HTTPS --> Firebase
     Firebase -- Realtime Sync --> App
 ```
-This repository contains:
-- The Android project in [`app/`](android/app)
-- Firmware under [`firmware/`](firmware/stm32f429_sim7600_rawtcp)
-- TCP relay code under [`server/`](server).
 
 ## Getting Started
 
