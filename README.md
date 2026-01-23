@@ -39,8 +39,8 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - Machine-to-Machine (M2M) SIM card -> I used **Things Mobile** network operator
 
 <p align="center">
-  <img src="images/STM32F429+SIM7600G-H.jpg" width="500" />
-  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="500" />
+  <img src="images/STM32F429+SIM7600G-H.jpg" width="450" />
+  <img src="images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="450" />
 </p>
 
 # Software & Tools
