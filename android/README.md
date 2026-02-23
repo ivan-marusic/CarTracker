@@ -23,6 +23,21 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 #### Car out of radius
    ![Out of Radius](../images/out_of_radius.jpg)
 
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center"><strong>Start page</strong><br><img src="../images/start_page.jpg" width="250"></td>
+    <td align="center"><strong>Sign-up page</strong><br><img src="../images/sign-up.jpg" width="250"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Car in 30km radius</strong><br><img src="../images/in_radius.jpg" width="250"></td>
+    <td align="center"><strong>Car out of radius</strong><br><img src="../images/out_of_radius.jpg" width="250"></td>
+  </tr>
+</table>
+
+</div>
+
 ## Technologies Used
 
 - Kotlin (Android)
