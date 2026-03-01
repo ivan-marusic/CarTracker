@@ -39,7 +39,7 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - USB-A to Mini USB cable (STM32F429)
 - USB-A to Micro USB cable (SIM7600G-H and PmodUSBUART)
 - Machine-to-Machine (M2M) SIM card
-    -> Tested with **Things Mobile** network operator
+    -> Tested with **Onomondo** network operator
 
 <p align="center">
   <img src="images/STM32F429+SIM7600G-H.jpg" width="400" />
