@@ -1,6 +1,6 @@
-# CarTracker
+# CarTracker App
 
-CarTracker is an Android application that displays the real-time location of a vehicle using data from Firebase.  
+CarTracker App is an Android application that displays the real-time location of a vehicle using data from Firebase.  
 The vehicle's location is sent by a custom device built with an STM32F429 microcontroller and a SIM7600G-H CAT4 4G (LTE) Shield.
 
 <p align="center">
