@@ -84,7 +84,7 @@ Telemetry JSON Format
 This structure matches the Firebase Realtime Database schema used by the Android app.
 Full details, including setup and code structure, are located in: [firmware/stm32f429_sim7600_rawtcp](firmware/stm32f429_sim7600_rawtcp/)
 
-## Android App (Kotlin)
+## CarTracker Android app (Kotlin)
 The Android app uses Firebase Realtime Database and Google Maps SDK to:
 - Connects to Firebase Realtime Database
 - Observes the /location node for live updates
