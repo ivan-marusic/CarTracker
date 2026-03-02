@@ -1,10 +1,12 @@
 # CarTracker
 
-**CarTracker** is an end‑to‑end, privacy‑preserving vehicle tracking system composed of:
+**CarTracker** is an end‑to‑end, privacy‑preserving GPS vehicle tracking system built from scratch using embedded hardware, a lightweight cloud proxy, Firebase Realtime Database, and a Android application.
+The system consists of:
 
-- [**CarTracker Android app**](android) (Kotlin) — displays real‑time vehicle location from Firebase on Google Maps.
-- [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — acquires GNSS position and streams compact JSON over raw TCP.
-- [**Python TCP relay (Oracle VM)**](server/python) — receives JSON over TCP and updates Firebase Realtime Database via HTTPS.
+- [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — obtains GNSS location and sends compact JSON via raw TCP/HTTP.
+- [**Fly.io Python Proxy (Flask)**](server/python) — receives POST /update from the embedded device and pushes the data to Firebase Realtime Database.
+- [**Firebase Realtime Database**] — stores the most recent location and enables real‑time sync.
+- [**CarTracker Android app**](android) (Kotlin) — displays real‑time vehicle location from Firebase on Google Maps with geofencing behavior.
 
 ## System Architecture
 <p align="center">
@@ -22,9 +24,15 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 ## Features
 
 - **Live location** updates to Firebase Realtime Database
-- **Lightweight modem stack**: SIM7600 AT‑sockets (`NETOPEN`/`CIPOPEN`/`CIPSEND`) — **no PPP/LwIP** on the MCU
-- **Minimal bandwidth JSON**: `{"latitude":..., "longitude":..., "timestamp":"..."}` (newline‑delimited)
-- **Clean separation of concerns**: firmware ↔ relay ↔ mobile app
+- **Lightweight modem stack**: SIM7600 AT‑sockets
+    - NETOPEN, CIPOPEN, CIPSEND
+    - Manual HTTP POST assembly with correct Content-Length
+- **Minimal data usage** (~120 bytes per update)
+- **Low‑latency proxy** hosted on Fly.io with auto‑sleep
+- **Android client** with:
+    - Google Maps
+    - Geofencing (radius check)
+- **Fully offline‑capable MCU** (no Linux, no PPP required)
 - **Extensible** to historical tracks, alerts, and telemetry (speed, sats, battery)
 
 ## Hardware
@@ -51,8 +59,8 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - **STM32CubeIDE** – firmware development and flashing
 - **PuTTY** – UART debugging and AT command testing
 - **Android Studio** – building and running the Android app
-- **Python 3** – running the TCP relay server
-- **Oracle Server** – hosting the relay server
+- **Python3** – running the TCP relay server
+- **Fly.io proxy** – forwards JSON to Firebase
 - **Firebase Console** – monitoring Realtime Database
 
 ## Firmware (STM32F429 + SIM7600G‑H)
@@ -75,18 +83,6 @@ Telemetry JSON Format
 ```
 This structure matches the Firebase Realtime Database schema used by the Android app.
 Full details, including setup and code structure, are located in: [firmware/stm32f429_sim7600_rawtcp](firmware/stm32f429_sim7600_rawtcp/)
-
-## Python TCP Relay (Oracle VM)
-The relay server acts as a secure gateway between the embedded device and Firebase:
-
-- Accepts incoming raw TCP connections
-- Parses newline‑delimited JSON
-- Issues HTTPS PUT requests to Firebase
-- Writes to the database path:
-/location
-
-Server setup and configuration:
-[server/python](server/python)
 
 ## Android App (Kotlin)
 The Android app uses Firebase Realtime Database and Google Maps SDK to:
