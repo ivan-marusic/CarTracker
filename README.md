@@ -63,21 +63,22 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 - **Fly.io proxy** – forwards JSON to Firebase
 - **Firebase Console** – monitoring Realtime Database
 
-## Firmware (STM32F429 + SIM7600G‑H)
-The firmware communicates with the SIM7600G‑H modem via UART and performs:
+## Embedded Firmware (STM32F429 + SIM7600G‑H)
+The firmware communicates with the SIM7600G‑H modem using UART2 and performs AT commands:
 
-- GNSS activation (`AT+CGNSPWR=1`)
+- Powering and initializing the SIM7600 modem
+- Enabling GNSS (`AT+CGNSPWR=1`)
 - GNSS location retrieval (`AT+CGNSINF`)
-- APN configuration (`AT+CGDCONT`)
+- Configuring APN (`AT+CGDCONT`)
 - Modem IP stack activation (`AT+NETOPEN`)
-- TCP socket creation (`AT+CIPOPEN`)
+- Creating TCP sockets (`AT+CIPOPEN`)
 - JSON telemetry upload (`AT+CIPSEND`)
 
 Telemetry JSON Format
 ```
 {  
-  "latitude": 44.110000,
-  "longitude": 15.400000,
+  "latitude": 45.110000,
+  "longitude": 17.400000,
   "timestamp": "2025-08-09T16:30:00Z"
 }
 ```
