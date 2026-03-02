@@ -105,10 +105,9 @@ To run:
 
 ## Testing the System
 
-1.Start the Python TCP relay on the VM
-(ensure the TCP port is open)
-2. Power on the embedded device
-3. Watch serial logs for:
+1. Start your Fly.io proxy (auto-starts on request)
+2. Power on the embedded device (STM32F429 + SIM7600G-H)
+3. Watch debug UART:
     NETOPEN OK
     CIPOPEN OK
     SEND OK
@@ -116,7 +115,7 @@ To run:
 4. Check Firebase Console -> Realtime Database -> /location
 
 5. Open the Android app:
-   -> Map updates live with the transmitted coordinates
+   -> see real‑time map update
 
 ## License
 This project is MIT licensed unless stated otherwise in sub‑folders.
