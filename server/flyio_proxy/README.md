@@ -11,38 +11,38 @@ The MCU sends a simple JSON payload to this proxy, and the proxy handles the sec
 ## Deployment on Fly.io
 Using this commands on Linux terminal:
 1. Install Fly CLI
-   bash```
+   ```bash
    curl -L https://fly.io/install.sh | sh
    ```
 2. Log in
-   bash```
+   ```bash
    fly auth login
    ```
 3. Deploy the application
    From inside server/python/:
-   bash```
+   ```bash
    fly launch
    fly deploy
    ```
 4. Set your Firebase Realtime Database URL
-   bash```
+   ```bash
    fly secrets set FIREBASE_URL="https://<your-db>.firebasedatabase.app/location.json"
    ```
 This sets the correct Firebase endpoint for PUT requests.
 
 ## Testing the Proxy
 1. Local test
-bash```
+```bash
 FIREBASE_URL="https://your.firebaseio.com/location.json" python3 app.py
 ```
 Send a test POST:
-bash```
+```bash
 curl -X POST http://localhost:8080/update \
   -H "Content-Type: application/json" \
   -d '{"latitude":45.0,"longitude":17.0,"timestamp":"2025-08-09T16:30:00Z"}'
 ```
 2. Test the live Fly.io deployment
-bash```
+```bash
 curl -X POST https://cartracker-proxy.fly.dev/update \
   -H "Content-Type: application/json" \
   -d '{"latitude":45.0,"longitude":17.0,"timestamp":"2025-08-09T16:30:00Z"}'
