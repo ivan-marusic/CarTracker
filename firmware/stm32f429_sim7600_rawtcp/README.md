@@ -22,7 +22,7 @@ The modem sends:
 ```JSON
 {
 "latitude": 49.110000, 
-"longitude": 17.400000>,
+"longitude": 17.400000,
 "timestamp": "2025-08-09T16:30:00Z"
 }
 ```
