@@ -5,16 +5,17 @@
 </p>
 
 STM32F429 + SIM7600G‑H Raw TCP Telemetry Firmware
-This firmware is part of the CarTracker system, a vehicle‑tracking solution that sends real‑time GPS coordinates from an embedded device to a cloud backend. The data is consumed by an Android application that displays the vehicle location using Firebase Realtime Database.
+This firmware is part of the CarTracker system, a vehicle‑tracking solution that sends real‑time GPS coordinates from a STM32 microcontroller to a cloud proxy (Fly.io), which then forwards the data to Firebase Realtime Database. The Firebase data is consumed by the Android CarTracker app for live vehicle tracking
 
 ## Overview
 This firmware runs on:
 
 STM32F429 microcontroller
 SIM7600G‑H 4G/LTE modem (UART communication)
-GNSS receiver inside SIM7600
+GNSS receiver built into the SIM7600 module
 
-It uses the SIM7600's internal TCP/IP stack (not PPP, not LwIP) to establish a raw TCP connection directly to a custom server hosted on an Oracle Cloud VM. The server then forwards location data to Firebase Realtime Database over HTTPS.
+Communication uses the SIM7600 internal TCP/IP stack — not PPP, not LwIP.
+The STM32 opens a raw TCP socket, manually sends an HTTP POST request, and closes/reuses the socket as needed.
 The modem sends:
 JSON{"latitude": <value>, "longitude": <value>, "timestamp": "<ISO8601>"} Prikaži više redaka
 Each packet is a newline‑terminated JSON string.
