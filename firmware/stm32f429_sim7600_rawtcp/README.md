@@ -96,7 +96,7 @@ Pmod USB‑UART(for debugging)
 
 During development, I used a **Pmod USB‑UART adapter** connected to **UART5** on the STM32F429 in order to monitor all communication between the MCU (UART2) and the SIM7600G‑H modem.
 
-Although the SIM7600G‑H is wired to **USART2** (PD5 = TX2, PD6 = RX2), I routed the transmitted AT commands and received modem responses into **USART5** so they could be viewed on a PC terminal at **115200 baud**.
+Although the SIM7600G‑H is wired to **USART2** (PD5 = TX2, PD6 = RX2), I routed the transmitted AT commands and received modem responses into **USART5** so they could be viewed on a PC terminal (Putty) at **115200 baud**.
 
 This allows real‑time debugging of:
 - All outgoing AT commands from STM32 → SIM7600  
