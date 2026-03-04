@@ -20,7 +20,10 @@ However, the connection between the SIM7600 modem and the Fly.io proxy is not en
 The SIM7600G‑H module technically supports HTTPS, but it requires a modern TLS stack and valid CA certificates to be uploaded directly to the modem. My device is running an older firmware that does not fully support the necessary TLS features.
 
 ## System Architecture
-
+<p align="center">
+  <img src="images/system.drawio.png" width="250" />
+</p
+   
 ## Deployment on Fly.io
 Using this commands on Linux terminal:
 1. Install Fly CLI
