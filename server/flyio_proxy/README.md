@@ -23,8 +23,6 @@ The SIM7600G‑H module technically supports HTTPS, but it requires a modern TLS
 <p align="center">
   <img src="../../images/system.drawio.png" width="250" />
 </p
-
-   
 ## Deployment on Fly.io
 Using this commands on Linux terminal:
 1. Install Fly CLI
