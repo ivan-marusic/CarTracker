@@ -18,7 +18,7 @@ Communication uses the SIM7600 internal TCP/IP stack — not PPP, not LwIP.
 The STM32 opens a raw TCP socket, manually sends an HTTP POST request, and closes/reuses the socket as needed.
 
 The modem sends:
-```json{"latitude": <value>, "longitude": <value>, "timestamp": "<ISO8601>"}```
+```c{"latitude": <value>, "longitude": <value>, "timestamp": "<ISO8601>"}```
 Each packet is a newline‑terminated JSON string.
 
 ## Features
