@@ -6,7 +6,7 @@ The system consists of:
 - [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — obtains GNSS location and sends compact JSON via raw TCP/HTTP.
 - [**Fly.io Python Proxy (Flask)**](server/flyio_proxy) — receives POST /update from the embedded device and pushes the data to Firebase Realtime Database.
 - [**Firebase Realtime Database**] — stores the most recent location and enables real‑time sync.
-- [**CarTracker Android app**](android) (Kotlin) — displays real‑time vehicle location from Firebase on Google Maps with geofencing behavior.
+- [**CarTracker Android app**](android) (Kotlin + Google Maps SDK) — displays real‑time vehicle location from Firebase on Google Maps with geofencing behavior.
 
 ## System Architecture
 <p align="center">
@@ -57,22 +57,24 @@ git clone https://github.com/ivan-marusic/CarTracker.git
 ## Software & Tools
 
 - **STM32CubeIDE** – firmware development and flashing
-- **PuTTY** – UART debugging and AT command testing
+- **PuTTY/Minicom** – UART debugging and AT command testing
 - **Android Studio** – building and running the Android app
-- **Python3** – running the TCP relay server
-- **Fly.io proxy** – forwards JSON to Firebase
+- **Python 3 + Flask + Gunicorn** — Fly.io proxy
 - **Firebase Console** – monitoring Realtime Database
+- draw.io — system diagrams
 
 ## Embedded Firmware (STM32F429 + SIM7600G‑H)
 The firmware communicates with the SIM7600G‑H modem using UART2 and performs AT commands:
 
 - Powering and initializing the SIM7600 modem
-- Enabling GNSS (`AT+CGNSPWR=1`)
-- GNSS location retrieval (`AT+CGNSINF`)
-- Configuring APN (`AT+CGDCONT`)
+- Enabling GNSS (`AT+CGPS=1`)
+- GNSS location retrieval (`AT+CGPSINFO`)
+- Configuring APN (`AT+CGDCONT=1,"IP","<APN>"`)
 - Modem IP stack activation (`AT+NETOPEN`)
-- Creating TCP sockets (`AT+CIPOPEN`)
-- JSON telemetry upload (`AT+CIPSEND`)
+- Creating TCP sockets (`AT+CIPOPEN=0,"TCP","cartracker-proxy.fly.dev",80`)
+- JSON telemetry upload (`AT+CIPSEND=0,<len>
+<HTTP headers>
+<JSON body>`)
 
 Telemetry JSON Format
 ```
