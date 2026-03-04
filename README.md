@@ -72,9 +72,7 @@ The firmware communicates with the SIM7600G‑H modem using UART2 and performs A
 - Configuring APN (`AT+CGDCONT=1,"IP","<APN>"`)
 - Modem IP stack activation (`AT+NETOPEN`)
 - Creating TCP sockets (`AT+CIPOPEN=0,"TCP","cartracker-proxy.fly.dev",80`)
-- JSON telemetry upload (`AT+CIPSEND=0,<len>
-<HTTP headers>
-<JSON body>`)
+- JSON telemetry upload (`AT+CIPSEND=0,<len><HTTP headers><JSON body>`)
 
 Telemetry JSON Format
 ```
