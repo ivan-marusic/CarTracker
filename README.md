@@ -10,7 +10,7 @@ The system consists of:
 
 ## System Architecture
 <p align="center">
-  <img src="images/system.drawio.png" width="300" />
+  <img src="images/system.drawio.png" width="250" />
 </p>
 
 ## Getting Started
