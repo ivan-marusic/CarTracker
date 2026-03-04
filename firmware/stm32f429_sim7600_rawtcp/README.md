@@ -19,7 +19,11 @@ The STM32 opens a raw TCP socket, manually sends an HTTP POST request, and close
 
 The modem sends:
 
-```{"latitude": <value>, "longitude": <value>, "timestamp": "<ISO8601>"}```
+```JSON
+{"latitude": <value>, 
+"longitude": <value>,
+"timestamp": "<ISO8601>"}
+```
 
 Each packet is a newline‑terminated JSON string.
 
