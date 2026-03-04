@@ -21,7 +21,7 @@ The SIM7600G‑H module technically supports HTTPS, but it requires a modern TLS
 
 ## System Architecture
 <p align="center">
-  <img src="images/system.drawio.png" width="250" />
+  <img src="../../images/system.drawio.png" width="250" />
 </p
    
 ## Deployment on Fly.io
