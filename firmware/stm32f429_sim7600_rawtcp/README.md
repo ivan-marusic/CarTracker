@@ -135,13 +135,13 @@ Even though **USART2** is the actual interface to the SIM7600G‑H module:
 - **USART2_TX (PD5)** sends AT commands → modem  
 - **USART2_RX (PD6)** receives responses ← modem  
 
-I mirrored important log messages and raw AT traffic to **USART5**, so I could observe everything using the Pmod USB‑UART and a serial program such as PuTTY, Minicom, or CuteCom.
+I mirrored important log messages and raw AT traffic to **USART5**, so I could observe everything using the Pmod USB‑UART and a serial program such as PuTTY or Minicom.
 
 This “debug UART tapping” is extremely helpful for:
 - Debugging new AT commands  
 - Watching GNSS output changes  
 - Inspecting TCP socket sequences (`NETOPEN`, `CIPOPEN`, `CIPSEND`)  
-- Diagnosing connectivity failures over LTE  
+- Diagnosing connectivity failures  
 
 ### Debugging Adapter
 <p align="center">
