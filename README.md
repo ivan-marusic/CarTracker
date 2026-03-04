@@ -33,7 +33,7 @@ git clone https://github.com/ivan-marusic/CarTracker.git
     - Google Maps
     - Geofencing (radius check)
 - **Fully offline‑capable MCU** (no Linux, no PPP required)
-- **Extensible** to historical tracks, alerts, and telemetry (speed, sats, battery)
+- **Extensible** to historical tracks, alerts, and telemetry (speed, battery)
 
 ## Hardware
 
@@ -72,7 +72,7 @@ The firmware communicates with the SIM7600G‑H modem using UART2 and performs A
 - Configuring APN (`AT+CGDCONT=1,"IP","<APN>"`)
 - Modem IP stack activation (`AT+NETOPEN`)
 - Creating TCP sockets (`AT+CIPOPEN=0,"TCP","cartracker-proxy.fly.dev",80`)
-- JSON telemetry upload (`AT+CIPSEND=0,<len><HTTP headers><JSON body>`)
+- JSON telemetry upload (`AT+CIPSEND=0,<len>`)
 
 Telemetry JSON Format
 ```
