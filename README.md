@@ -75,7 +75,7 @@ The firmware communicates with the SIM7600G‑H modem using UART2 and performs A
 - JSON telemetry upload (`AT+CIPSEND=0,<len>`)
 
 Telemetry JSON Format
-```
+```json
 {  
   "latitude": 45.110000,
   "longitude": 17.400000,
@@ -103,6 +103,19 @@ To run:
 1. Open in Android Studio
 2. Add Firebase configuration
 3. Build and deploy. [See here](android)
+
+## Security
+- The device sends **HTTP over raw TCP** to the Fly.io proxy.
+- The **Fly.io proxy** authenticates to Firebase using the **Firebase Admin SDK** and writes to `/location`.
+- Suggested Realtime Database rules:
+  ```json
+  {
+    "rules": {
+      ".read": true,
+      ".write": false,
+      "location": { ".write": "auth != null" }
+    }
+  }
 
 ## Testing the System
 
