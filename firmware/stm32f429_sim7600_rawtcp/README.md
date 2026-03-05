@@ -145,7 +145,7 @@ This “debug UART tapping” is extremely helpful for:
 
 ### Debugging Adapter
 <p align="center">
-<img src="../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="900" />
+<img src="../../images/STM32F429+SIM7600G-H+PmodUSBUART.jpg" width="600" />
 </p>
 
 ## License
