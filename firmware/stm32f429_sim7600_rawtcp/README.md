@@ -95,7 +95,7 @@ Content-Length: <len>
 
 {"latitude":..., "longitude":..., "timestamp":"..."}
 ```
-The proxy performs HTTPS PUT → Firebase.
+The proxy performs an authenticated Admin SDK write → Firebase.
 The Android app receives realtime updates from Firebase.
 
 ## Requirements
