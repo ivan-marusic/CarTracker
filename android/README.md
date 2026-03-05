@@ -34,7 +34,7 @@ The vehicle location is produced by an STM32F429 + SIM7600G‑H device, sent via
 - Kotlin / Android SDK
 - Google Maps SDK
 - Firebase Realtime Database
-- Fly.io Cloud Proxy (Flask + Gunicorn) → writes telemetry to Firebase
+- Fly.io Cloud Proxy (Flask + Gunicorn) →  writes telemetry to Firebase via Firebase Admin SDK
 - Embedded device: STM32F429 + SIM7600G‑H GNSS (AT+CGPSINFO)
 
 ## Incoming Telemetry Format
