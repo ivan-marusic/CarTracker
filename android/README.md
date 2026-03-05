@@ -1,7 +1,7 @@
 # CarTracker App
 
-CarTracker App is an Android application that displays the real-time location of a vehicle using data from Firebase.  
-The vehicle's location is sent by a custom device built with an STM32F429 microcontroller and a SIM7600G-H CAT4 4G (LTE) Shield.
+CarTracker App is an Android application that displays the real-time location of a vehicle using Firebase Realtime Database as the data source. 
+The vehicle location is produced by an STM32F429 + SIM7600G‑H device, sent via a Fly.io Python proxy, and written to the /location node in Firebase.
 
 <p align="center">
     <img src="app/src/main/res/drawable/cartracker_background.jpeg" width="600" />
@@ -9,9 +9,10 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 
 ## Features
 
-- Real-time location tracking
+- Real-time location tracking (Firebase → Google Maps)
 - Alerts when vehicle moves 30 km within a defined radius
-- Location updates every 10 seconds
+- Location updates typically every 10 seconds (MCU configurable)
+- Data is received instantly via Firebase realtime listeners
 
 <div align="center">
 
@@ -30,10 +31,22 @@ The vehicle's location is sent by a custom device built with an STM32F429 microc
 
 ## Technologies Used
 
-- Kotlin (Android)
-- Firebase Realtime Database
+- Kotlin / Android SDK
 - Google Maps SDK
-- STM32F429 + SIM7600G-H CAT4 4G (LTE) Shield (CarTracker device)
+- Firebase Realtime Database
+- Fly.io Cloud Proxy (Flask + Gunicorn) → writes telemetry to Firebase
+- Embedded device: STM32F429 + SIM7600G‑H GNSS (AT+CGPSINFO)
+
+## Incoming Telemetry Format
+The Android app listens to the /location node:
+```JSON
+{
+  "latitude": 44.110000,
+  "longitude": 15.400000,
+  "timestamp": "2025-08-09T16:30:00Z"
+}
+```
+This JSON is written by the Fly.io proxy after receiving telemetry from the MCU.
 
 ## Getting Started
 
