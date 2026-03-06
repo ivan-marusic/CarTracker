@@ -68,14 +68,6 @@ int SIM7600_SendAT_WaitFor(const char *cmd, const char *expect, uint32_t timeout
     return -2;
 }
 
-/* ----------------- GNSS ----------------- */
-
-int SIM7600_EnableGNSS(void)
-{
-    LOG_INFO("SIM7600: Enabling GNSS");
-    return SIM7600_SendAT_WaitFor("AT+CGNSPWR=1\r", "OK", 2000);
-}
-
 /* ----------------- RAW TCP over modem ----------------- */
 
 // Send raw bytes (not zero-terminated) over UART
@@ -694,3 +686,4 @@ int send_gps_minimal_to_fly(void)
     LOG_INFO("Minimal GPS sent OK: %s", json);
     return 0;
 }
+
