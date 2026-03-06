@@ -5,7 +5,7 @@ The system consists of:
 
 - [**Embedded firmware**](firmware/stm32f429_sim7600_rawtcp) (STM32F429 + SIM7600G‑H) — obtains GNSS location and sends compact JSON via raw TCP/HTTP.
 - [**Fly.io Python Proxy (Flask)**](server/flyio_proxy) — receives `POST /update` from the device and writes to **Firebase Realtime Database** using the **Firebase Admin SDK** (secure server-side writes).
-- [**Firebase Realtime Database**] — stores the most recent location and enables real‑time sync.
+- **Firebase Realtime Database** — stores the most recent location and enables real‑time sync.
 - [**CarTracker Android app**](android) (Kotlin + Google Maps SDK) — displays real‑time vehicle location from Firebase on Google Maps with geofencing behavior.
 
 ## System Architecture
