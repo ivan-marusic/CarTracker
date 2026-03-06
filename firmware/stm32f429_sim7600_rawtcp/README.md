@@ -47,28 +47,34 @@ Each packet is a newline‑terminated JSON string.
 <pre style="pointer-events: none;">
 firmware/
 │
-├─ Core/
-│  ├─ Inc/
-│  │   ├─ sim7600.h          # SIM7600 AT/TCP driver interface
-│  │   ├─ debug.h            # Logging macros (UART5)
-│  │   └─ main.h             # CubeMX-generated
-│  │
-│  └─ Src/
-│      ├─ sim7600.c          # SIM7600 driver (TCP + CGPSINFO GNSS parsing)
-│      ├─ main.c             # Application loop (CGPSINFO → HTTP POST → Fly.io)
-│      ├─ usart.c            # UART2 / UART5 init (CubeMX)
-│      ├─ gpio.c             # GPIO init (CubeMX)
-│      └─ stm32f4xx_it.c     # Interrupt handlers (CubeMX)
-│
-├─ Drivers/
-│  └─ STM32F4xx_HAL_Driver/  # CubeMX HAL drivers
-│
-├─ images/
-│  ├─ STM32F429+SIM7600G-H.jpg
-│  └─ STM32F429+SIM7600G-H+PmodUSBUART.jpg
-│
-├─ Project.ioc               # CubeMX project configuration
-└─ README.md                 # This firmware documentation
+└─ stm32f429_sim7600_rawtcp/
+   │
+   ├─ Core/
+   │   ├─ Inc/
+   │   │   ├─ sim7600.h                 # SIM7600 AT/TCP driver interface
+   │   │   ├─ debug.h                   # Logging macros (UART5)
+   │   │   ├─ main.h                    # CubeMX-generated
+   │   │   ├─ stm32f4xx_hal_conf.h      # HAL config
+   │   │   └─ stm32f4xx_it.h            # Interrupt headers
+   │   │
+   │   ├─ Src/
+   │   │   ├─ sim7600.c                 # SIM7600 driver (TCP + CGPSINFO parsing)
+   │   │   ├─ main.c                    # Application loop (CGPSINFO → HTTP POST)
+   │   │   ├─ stm32f4xx_hal_msp.c       # HAL MSP init
+   │   │   ├─ stm32f4xx_it.c            # Interrupt handlers
+   │   │   ├─ syscalls.c                # System calls (CubeMX)
+   │   │   ├─ sysmem.c                  # Memory systems (CubeMX)
+   │   │   └─ system_stm32f4xx.c        # System clock configuration
+   │   │
+   │   └─ Startup/
+   │       └─ startup_stm32f429zitx.s   # MCU startup assembly
+   │
+   ├─ Drivers/
+   │   ├─ CMSIS/                        # Cortex-M4 core support
+   │   └─ STM32F4xx_HAL_Driver/         # STM32 HAL drivers
+   │
+   ├─ CarTracker.ioc                    # STM32CubeMX project configuration
+   └─ README.md                         # Firmware documentation
 </pre>
 
 ## How It Works
