@@ -386,123 +386,6 @@ int SIM7600_TCP_Open(uint8_t link_id, const char *host, uint16_t port)
     return -15; 
 }
 
-static int SIM7600_TCP_Send_NoLen(uint8_t link_id, const uint8_t *data, int len, uint32_t timeout_ms)
-{
-    char cmd[32];
-    snprintf(cmd, sizeof(cmd), "AT+CIPSEND=%u\r", link_id);
-
-    if (SIM7600_UART_Send(cmd) != HAL_OK) return -1;
-    if (SIM7600_WaitForChar('>', 2000) != 0) {
-        LOG_ERROR("SIM7600: No '>' prompt for CIPSEND(no-len)");
-        return -2;
-    }
-
-    if (SIM7600_UART_SendBuf(data, (uint16_t)len) != HAL_OK) return -3;
-
-    const uint8_t ctrlz = 0x1A;
-    if (SIM7600_UART_SendBuf(&ctrlz, 1) != HAL_OK) return -4;
-
-    char line[256];
-    uint32_t start = HAL_GetTick();
-    while (HAL_GetTick() - start < timeout_ms) {
-        int l = SIM7600_ReadLine(line, sizeof(line), 500);
-        if (l <= 0) continue;
-        if (strstr(line, "SEND OK")) return 0;
-        if (strstr(line, "SEND FAIL") || strstr(line, "ERROR") || strstr(line, "FAIL")) {
-            LOG_ERROR("SIM7600: Send(no-len) failed, line=%s", line);
-            return -5;
-        }
-    }
-    LOG_WARN("SIM7600: Timeout waiting for SEND OK (no-len)");
-    return -6;
-}
-
-
-int SIM7600_HTTP_Post_Update_lenMode(const char *json)
-{
-    if (!json) return -1;
-    const int json_len = (int)strlen(json);
-
-
-    char req[1024];
-    int n = snprintf(req, sizeof(req),
-        "POST /update HTTP/1.1\r\n"
-        "Host: %s\r\n"
-        "Content-Type: application/json\r\n"
-        "Connection: close\r\n"
-        "Content-Length: %d\r\n"
-        "\r\n"
-        "%s",
-        FLY_HOST, json_len, json);
-
-    if (n <= 0 || n >= (int)sizeof(req)) {
-        LOG_ERROR("HTTP req too large or snprintf error (n=%d)", n);
-        return -2;
-    }
-
-    if (SIM7600_TCP_Open(0, FLY_HOST, FLY_PORT) != 0) {
-        LOG_ERROR("CIPOPEN failed");
-        return -3;
-    }
-
-    HAL_Delay(10);
-
-    int sret = SIM7600_TCP_Send(0, (const uint8_t*)req, n, 15000);
-    if (sret != 0) {
-        LOG_ERROR("TCP SEND failed (%d)", sret);
-        SIM7600_TCP_Close(0);
-        return -4;
-    }
-
-    char line[256];
-    uint32_t t0 = HAL_GetTick();
-    while (HAL_GetTick() - t0 < 3000) {
-        int l = SIM7600_ReadLine(line, sizeof(line), 500);
-        if (l > 0) LOG_INFO("HTTP RX: %s", line);
-    }
-
-    SIM7600_TCP_Close(0);
-    return 0;
-}
-
-int SIM7600_HTTP_Post_Update_noLen(const char *json)
-{
-    if (!json) return -1;
-    const int json_len = (int)strlen(json);
-
-    char req[1024];
-    int n = snprintf(req, sizeof(req),
-        "POST /update HTTP/1.1\r\n"
-        "Host: %s\r\n"
-        "Content-Type: application/json\r\n"
-        "Connection: close\r\n"
-        "Content-Length: %d\r\n"
-        "\r\n"
-        "%s",
-        FLY_HOST, json_len, json);
-    if (n <= 0 || n >= (int)sizeof(req)) return -2;
-
-    if (SIM7600_TCP_Open(0, FLY_HOST, FLY_PORT) != 0) return -3;
-
-    HAL_Delay(10);
-    int sret = SIM7600_TCP_Send_NoLen(0, (const uint8_t*)req, n, 15000);
-    if (sret != 0) {
-        LOG_ERROR("TCP SEND (no-len) failed (%d)", sret);
-        SIM7600_TCP_Close(0);
-        return -4;
-    }
-
-    char line[256];
-    uint32_t t0 = HAL_GetTick();
-    while (HAL_GetTick() - t0 < 3000) {
-        int l = SIM7600_ReadLine(line, sizeof(line), 500);
-        if (l > 0) LOG_INFO("HTTP RX: %s", line);
-    }
-
-    SIM7600_TCP_Close(0);
-    return 0;
-}
-
 int SIM7600_TCP_Send(uint8_t link_id, const uint8_t *data, int len, uint32_t timeout_ms)
 {
     char cmd[64];
@@ -548,43 +431,6 @@ int SIM7600_TCP_Close(uint8_t link_id)
 int SIM7600_TCP_NetClose(void)
 {
     SIM7600_SendAT_WaitFor("AT+NETCLOSE\r", "OK", 10000);
-    return 0;
-}
-
-
-int send_gps_to_fly(void)
-{
-    GNSS_Location loc;
-    int r;
-
-    LOG_INFO("GETTING GNSS FIX...");
-
-    r = SIM7600_ReadLocation_GNSS(&loc);
-    if (r != 0) {
-        LOG_WARN("GNSS not ready (%d)", r);
-        return -1;
-    }
-
-    LOG_INFO("GNSS OK: lat=%.6f lon=%.6f time=%s",
-             loc.latitude, loc.longitude, loc.iso8601);
-
-    char json[256];
-    int n = snprintf(json, sizeof(json),
-        "{\"latitude\":%.6f,\"longitude\":%.6f,\"timestamp\":\"%s\"}",
-        loc.latitude, loc.longitude, loc.iso8601);
-
-    if (n <= 0 || n >= (int)sizeof(json)) {
-        LOG_ERROR("JSON build error");
-        return -2;
-    }
-
-    r = SIM7600_HTTP_Post_Fly(json);
-    if (r != 0) {
-        LOG_ERROR("HTTP POST FAIL (%d)", r);
-        return -3;
-    }
-
-    LOG_INFO("GPS location sent successfully!");
     return 0;
 }
 
@@ -686,4 +532,3 @@ int send_gps_minimal_to_fly(void)
     LOG_INFO("Minimal GPS sent OK: %s", json);
     return 0;
 }
-
