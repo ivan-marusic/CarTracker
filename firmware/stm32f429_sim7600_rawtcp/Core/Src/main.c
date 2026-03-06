@@ -25,7 +25,6 @@
 #include <stm32f4xx_hal_uart.h>
 #include "sim7600.h"
 #include "gnss.h"
-#include "string.h"
 #include "stdio.h"
 /*#include "dbg_uart.h"*/
 #include "debug.h"
@@ -71,135 +70,10 @@ static void SIM7600_FlushRx(uint32_t ms)
     }
 }
 
-void SIM7600_Test_HTTP_Get(void)
-{
-	LOG_INFO("----- SIM7600 HTTP GET TEST START -----");
-
-	// *** HARD RESET MODEM ***
-	if (SIM7600_ResetAndWaitReady(12000) != 0) {
-	    LOG_ERROR("Modem boot timeout after CFUN=1,1");
-	    return;
-	}
-
-	SIM7600_FlushRx(100);
-
-	/* Open network with your APN*/
-	if(SIM7600_TCP_NetOpen("TMSTATIC") != 0) {
-		LOG_ERROR("NETOPEN FAILED");
-		return;
-	}
-
-	// 2) Zaobiđi DNS za probu (IP za httpbin.org primjer; može se mijenjati)
-	if (SIM7600_TCP_Open(0, "34.199.6.103", 80) != 0) {
-	    LOG_ERROR("CIPOPEN by IP FAILED");
-	    return;
-	}
-	LOG_INFO("TCP OPEN OK (by IP)");
-
-
-	/* Open TCP connection to httpbin.org:80 */
-	if(SIM7600_TCP_Open(0, "httpbin.org", 80) != 0) {
-		LOG_ERROR("CIPOPEN FAILED");
-		return;
-	}
-	LOG_INFO("TCP OPEN OK");
-
-	/* HTTP GET request */
-	const char http_get[] =
-	        "GET /get HTTP/1.1\r\n"
-	        "Host: httpbin.org\r\n"
-	        "\r\n";
-
-	int length = strlen(http_get);
-	LOG_INFO("Sending HTTP GET (%d bytes)", length);
-
-	if (SIM7600_TCP_Send(0, (uint8_t*)http_get, length, 8000) != 0) {
-		LOG_ERROR("SEND FAILED");
-		return;
-	}
-
-	LOG_INFO("SEND OK - waiting for server response...");
-
-	/* Wait for response */
-	char line[256];
-	uint32_t start = HAL_GetTick();
-	while (HAL_GetTick() - start < 5000)
-	{
-		int l = SIM7600_ReadLine(line, sizeof(line), 500);
-		if (l > 0) {
-			LOG_INFO("RX: %s", line);
-		}
-	}
-
-	LOG_INFO("HTTP GET test done - closing TCP");
-
-	/*Close connection*/
-	SIM7600_TCP_Close(0);
-	SIM7600_TCP_NetClose();
-
-	LOG_INFO("----- SIM7600 HTTP GET TEST END ----");
-}
-/*
-static void send_once_to_fly(void)
-{
-    // 1) Pripremi JSON BEZ novog reda na kraju
-    const char *json = "{\"latitude\":44.110000,\"longitude\":15.400000,\"timestamp\":\"2025-08-09T16:30:00Z\"}";
-
-    // 2) Digni mrežu s tvojim APN-om (ako već nije dignuta)
-    if (SIM7600_TCP_NetOpen("onomondo") != 0) {
-        LOG_ERROR("NETOPEN FAILED");
-        return;
-    }
-
-    // 3) Pošalji HTTP POST (varijanta s duljinom)
-    int r = SIM7600_HTTP_Post_Update_lenMode(json);
-    if (r == 0) {
-        LOG_INFO("POST OK");
-    } else {
-        LOG_ERROR("POST FAIL (%d). Retrying with no-len...", r);
-        // fallback – probaj bez duljine (CTRL+Z)
-        r = SIM7600_HTTP_Post_Update_noLen(json);
-        if (r == 0) LOG_INFO("POST OK (no-len)");
-        else LOG_ERROR("POST FAIL even w/ no-len (%d)", r);
-    }
-
-    // 4) (opcionalno) NETCLOSE ako želiš štedjeti
-    // SIM7600_TCP_NetClose();
-}
-*/
-// druga verzija send_once_to_fly
-/*static void send_once_to_fly(void)
-{
-    // 1) Digni mrežu (robustna varijanta gore)
-    if (SIM7600_TCP_NetOpen("onomondo") != 0) {
-        LOG_ERROR("NETOPEN FAILED");
-        return;
-    }
-
-    // 2) JSON BEZ trailing newline-a
-    const char *json = "{\"latitude\":44.110000,\"longitude\":15.400000,\"timestamp\":\"2025-08-09T16:30:00Z\"}";
-
-    int r = SIM7600_HTTP_Post_Fly(json);
-    if (r == 0) LOG_INFO("POST OK");
-    else        LOG_ERROR("POST FAIL (%d)", r);
-
-    // 3) (opcionalno) ostavi NET otvoren za iduće slanje
-    // SIM7600_TCP_NetClose();
-}*/
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-/*
-static void Error_Handler_Blink(void)
-{
-    while (1)
-    {
-    	HAL_Delay(200);
-    }
-}
-*/
 
 int __io_putchar(int ch)
 {
@@ -242,9 +116,6 @@ int main(void)
   MX_UART5_Init();
   MX_USART2_UART_Init(); 		//
   /* USER CODE BEGIN 2 */
-
-  /*dbg_uart5_init();
-
   printf("UART5 debug online @115200\r\n");
 
   // Optional: small delay for modem power-up
@@ -252,11 +123,6 @@ int main(void)
 
   // Bring up GNSS (start early so fix can be acquired sooner)
   SIM7600_EnableGNSS();
-
-  // PDP + IP stack via modem
-  if (SIM7600_TCP_NetOpen("TM") != 0) {
-	  Error_Handler_Blink();
-  }
 
   // Connect to your Oracle VM (replace with your public IP/DNS)
   const char *HOST = "130.162.219.128";
@@ -276,40 +142,13 @@ int main(void)
   SIM7600_UART_Send("AT+CGPS=1\r");
   HAL_Delay(1500);
 
-  //SIM7600_Test_HTTP_Get();
-
-
   /* USER CODE END 2 */
-
-  /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  // Send JSON line to VM very 10s
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-	/*GNSS_Location loc;
-	int r = SIM7600_ReadLocation_GNSS(&loc);
-	if (r == 0) {
-		char json[192];
-		int n = snprintf(json, sizeof(json),
-		    "{\"latitude\":%.6f,\"longitude\":%.6f,\"timestamp\":\"%s\"}\n",
-		    loc.latitude, loc.longitude, loc.iso8601);
-		if (n > 0){
-			int sr = SIM7600_TCP_Send(LINK, (const uint8_t*)json, n, 8000);
-			if (sr != 0)
-			{
-				// reconnect if needed
-				SIM7600_TCP_Close(LINK);
-				HAL_Delay(2000);
-				SIM7600_TCP_Open(LINK, HOST, PORT);
-			}
-		}
-	}
-	HAL_Delay(10000);*/
 
   int r = send_gps_minimal_to_fly();
 
@@ -490,3 +329,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
