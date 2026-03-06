@@ -46,12 +46,10 @@ Each packet is a newline‑terminated JSON string.
 ## Directory Structure
 Core/Inc/
     sim7600.h        – AT command wrapper, TCP socket functions
-    gnss.h           – GNSS location parser
     debug.h          – Logging macros (optional)
     
 Core/Src/
     sim7600.c        – SIM7600 driver (TCP + GNSS)
-    gnss.c           – GNSS parsing and ISO8601 formatting
     main.c           – Example application loop
     usart.c, gpio.c  – CubeMX generated peripheral setup
     
