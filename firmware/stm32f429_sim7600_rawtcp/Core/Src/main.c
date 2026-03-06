@@ -123,7 +123,7 @@ int main(void)
 
   // Bring up PDP + modem IP stack once
   if (SIM7600_TCP_NetOpen("onomondo") != 0) {	// set your APN 
-	  LOG_ERROR(NETOPEN FAILED);
+	  LOG_ERROR("NETOPEN FAILED");
   }
 
   // Flush any leftover RX noise before the loop
@@ -316,5 +316,6 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
 
 
