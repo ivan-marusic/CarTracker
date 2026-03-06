@@ -258,7 +258,7 @@ int SIM7600_HTTP_Post_Fly(const char *json_body)
         return -2;
     }
 
-    int r = SIM7600_TCP_OpenAndSend(0, "cartracker-proxy.fly.dev", 80,
+    int r = SIM7600_TCP_OpenAndSend(0, FLY_HOST, FLY_PORT,
                                     (const uint8_t*)req, n, 35000);
     if (r != 0) {
         LOG_ERROR("OpenAndSend failed (%d)", r);
@@ -532,3 +532,4 @@ int send_gps_minimal_to_fly(void)
     LOG_INFO("Minimal GPS sent OK: %s", json);
     return 0;
 }
+
