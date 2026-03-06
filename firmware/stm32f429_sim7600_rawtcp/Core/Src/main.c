@@ -18,15 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
 #include <stm32f4xx_hal_uart.h>
 #include "sim7600.h"
-#include "gnss.h"
 #include "stdio.h"
-/*#include "dbg_uart.h"*/
 #include "debug.h"
 
 /* USER CODE END Includes */
@@ -74,14 +71,11 @@ static void SIM7600_FlushRx(uint32_t ms)
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 int __io_putchar(int ch)
 {
     HAL_UART_Transmit(&huart5, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
     return ch;
 }
-
-
 /* USER CODE END 0 */
 
 /**
@@ -96,8 +90,6 @@ int main(void)
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -121,26 +113,21 @@ int main(void)
   // Optional: small delay for modem power-up
   HAL_Delay(1000);
 
-  // Bring up GNSS (start early so fix can be acquired sooner)
-  SIM7600_EnableGNSS();
-
-  // Connect to your Oracle VM (replace with your public IP/DNS)
-  const char *HOST = "130.162.219.128";
-  const uint16_t PORT = 4000;
-  const uint8_t LINK = 0;
-
-  if (SIM7600_TCP_Open(LINK, HOST, PORT) != 0) {
-	  SIM7600_TCP_NetClose();
-	  Error_Handler_Blink();
-  }*/
-
-
+  // Basic modem init and enable GPS via CGPS path
   SIM7600_UART_Send("AT\r");
   HAL_Delay(200);
   SIM7600_UART_Send("ATE0\r");
   HAL_Delay(200);
-  SIM7600_UART_Send("AT+CGPS=1\r");
+  SIM7600_UART_Send("AT+CGPS=1\r");	// Use CGPSINFO path
   HAL_Delay(1500);
+
+  // Bring up PDP + modem IP stack once
+  if (SIM7600_TCP_NetOpen("onomondo") != 0) {	// set your APN 
+	  LOG_ERROR(NETOPEN FAILED);
+  }
+
+  // Flush any leftover RX noise before the loop
+  SIM7600_FlushRx(100);
 
   /* USER CODE END 2 */
   /* USER CODE BEGIN WHILE */
@@ -152,12 +139,12 @@ int main(void)
 
   int r = send_gps_minimal_to_fly();
 
-  // Ako nema fixa ili privremeni problem, pokušaj ponovno za 3 s
+  // If no fix or transient error retry
   if (r != 0) {
 	  HAL_Delay(3000);
 	  continue;
   }
-
+  // Period between updates
   HAL_Delay(10000);
 
   /* USER CODE END 3 */
@@ -329,4 +316,5 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+
 
