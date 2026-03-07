@@ -117,7 +117,7 @@ To run:
     }
   }
 
-The Fly.io proxy writes telemetry to the /location path as a single JSON object (not an array).
+The Fly.io proxy writes telemetry to the `/location` path as a single JSON object (not an array).
 
 ## Testing the System
 
