@@ -17,7 +17,6 @@ extern UART_HandleTypeDef huart2;
 #define FLY_HOST "cartracker-proxy.fly.dev"
 #define FLY_PORT 80
 
-static int SIM7600_ReadStreamUntil(const char* needle, char* out, int out_sz, uint32_t timeout_ms);
 
 HAL_StatusTypeDef SIM7600_UART_Send(const char *s)
 {
@@ -37,7 +36,7 @@ int SIM7600_ReadLine(char *buf, int max_len, uint32_t timeout_ms)
             if (idx < max_len - 1) buf[idx++] = (char)c;
             if (c == '\n') {
                 buf[idx] = '\0';
-                return idx;              
+                return idx;
             }
         }
     }
@@ -59,8 +58,8 @@ int SIM7600_SendAT_WaitFor(const char *cmd, const char *expect, uint32_t timeout
             if (n < (int)sizeof(buf) - 1) buf[n++] = (char)c;
             buf[n] = '\0';
 
-            if (strstr(buf, expect)) return 0;     
-            if (strstr(buf, "ERROR")) return -1;     
+            if (strstr(buf, expect)) return 0;
+            if (strstr(buf, "ERROR")) return -1;
         }
     }
     LOG_WARN("SIM7600: Timeout waiting for '%s', rx='%s'", expect, buf);
@@ -108,7 +107,7 @@ int SIM7600_TCP_NetOpen(const char *apn)
 
     SIM7600_SendAT_WaitFor("AT+CSOCKSETPN=1\r", "OK", 2000);
     HAL_Delay(50);
-	
+
     SIM7600_SendAT_WaitFor("AT+NETOPEN?\r", "OK", 2000);
 
     uint32_t t0 = HAL_GetTick();
@@ -127,9 +126,9 @@ int SIM7600_TCP_NetOpen(const char *apn)
         }
     }
 
-    SIM7600_SendAT_WaitFor("AT+IPADDR\r", "OK", 3000);
-   
-    opened = 1;
+    int saw_ip = (SIM7600_SendAT_WaitFor("AT+IPADDR\r", "OK", 3000) == 0);
+
+    opened = opened || saw_ip;
 
     SIM7600_SendAT_WaitFor("AT+CIPMODE=0\r", "OK", 2000);
 
@@ -162,7 +161,7 @@ int SIM7600_TCP_OpenAndSend(uint8_t link_id,
     uint32_t t0 = HAL_GetTick();
     int opened = 0;
 
-    while (HAL_GetTick() - t0 < 30000) { 
+    while (HAL_GetTick() - t0 < 30000) {
         uint8_t c;
         if (HAL_UART_Receive(&huart2, &c, 1, 200) == HAL_OK) {
             if (n < (int)sizeof(buf) - 1) buf[n++] = (char)c;
@@ -276,31 +275,12 @@ int SIM7600_HTTP_Post_Fly(const char *json_body)
     return 0;
 }
 
-static int SIM7600_ReadStreamUntil(const char* needle, char* out, int out_sz, uint32_t timeout_ms)
-{
-    if (!needle) return -1;
-    int n = 0;
-    out[0] = '\0';
-
-    uint32_t t0 = HAL_GetTick();
-    while (HAL_GetTick() - t0 < timeout_ms) {
-        uint8_t c;
-        if (HAL_UART_Receive(&huart2, &c, 1, 50) == HAL_OK) {
-            if (n < out_sz - 1) out[n++] = (char)c;
-            out[n] = '\0';
-
-            if (strstr(out, needle)) return 0; 
-            if (strstr(out, "ERROR") || strstr(out, "FAIL")) return -2;
-        }
-    }
-    return -3; // timeout
-}
 
 int SIM7600_ResetAndWaitReady(uint32_t timeout_ms)
 {
     // Hard reset
     SIM7600_SendAT_WaitFor("AT+CFUN=1,1\r", "OK", 2000);
-	
+
     uint32_t t0 = HAL_GetTick();
     char line[256];
     int got_rdy = 0, got_cpin = 0;
@@ -382,7 +362,7 @@ int SIM7600_TCP_Open(uint8_t link_id, const char *host, uint16_t port)
     }
 
     LOG_WARN("SIM7600: CIPOPEN URC timeout. RX='%s'", buf);
-    return -15; 
+    return -15;
 }
 
 int SIM7600_TCP_Send(uint8_t link_id, const uint8_t *data, int len, uint32_t timeout_ms)
@@ -441,12 +421,12 @@ static int ddmm_to_decimal(const char *ddmm, int is_lon, double *out_deg)
     if (val <= 0.0) return -2;
 
     if (is_lon) {
-        int deg = (int)(val / 100.0);         
-        double mins = val - (deg * 100.0);     
+        int deg = (int)(val / 100.0);
+        double mins = val - (deg * 100.0);
         *out_deg = deg + mins / 60.0;
     } else {
-        int deg = (int)(val / 100.0);           
-        double mins = val - (deg * 100.0);       
+        int deg = (int)(val / 100.0);
+        double mins = val - (deg * 100.0);
         *out_deg = deg + mins / 60.0;
     }
     return 0;
@@ -531,5 +511,3 @@ int send_gps_minimal_to_fly(void)
     LOG_INFO("Minimal GPS sent OK: %s", json);
     return 0;
 }
-
-
