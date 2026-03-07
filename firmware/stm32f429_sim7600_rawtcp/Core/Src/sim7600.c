@@ -10,6 +10,7 @@
 
 #include <math.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 extern UART_HandleTypeDef huart2;
 
@@ -511,3 +512,4 @@ int send_gps_minimal_to_fly(void)
     LOG_INFO("Minimal GPS sent OK: %s", json);
     return 0;
 }
+
