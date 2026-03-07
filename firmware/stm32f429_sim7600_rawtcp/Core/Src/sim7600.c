@@ -7,7 +7,6 @@
 #include "stdio.h"
 #include "debug.h"
 #include "stm32f4xx_hal_uart.h"
-#include "gnss.h"
 
 #include <math.h>
 #include <ctype.h>
@@ -532,4 +531,5 @@ int send_gps_minimal_to_fly(void)
     LOG_INFO("Minimal GPS sent OK: %s", json);
     return 0;
 }
+
 
